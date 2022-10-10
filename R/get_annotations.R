@@ -1,5 +1,7 @@
 #' @description
 #' Description.
+#' 
+#' @importFrom stats na.omit
 #'
 #' @param ids A param.
 #' @param separator A param.
@@ -27,7 +29,7 @@ get_annotations <- function(ids, ..., separator, annotations, id_col_name, unann
             ids,
             function(id) {
                 stringr::str_match(id, patterns) %>%
-                na.omit() %>%
+                stats::na.omit() %>%
                 as.data.frame(stringsAsFactors = FALSE)
             }
         )

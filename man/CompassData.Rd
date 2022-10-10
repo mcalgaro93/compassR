@@ -27,21 +27,22 @@ An object through which you can access several useful tables for your COMPASS an
 
 \item{\code{reaction_metadata}}{The reaction metadata from the metabolic model (RECON2, by default).}
 
-\item{\code{reaction_partitions}}{Each row describes a reaction in terms of its ID, undirected ID, direction, and metareaction ID.}
+\item{\code{reaction_partitions}}{Each row describes a reaction in terms of its ID, undirected ID, direction, and which metareaction (i.e. reaction group) it belongs to.}
 }
 \if{html}{\out{</div>}}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{CompassData$new()}}
-\item \href{#method-print}{\code{CompassData$print()}}
-\item \href{#method-repr}{\code{CompassData$repr()}}
-\item \href{#method-clone}{\code{CompassData$clone()}}
+\item \href{#method-CompassData-new}{\code{CompassData$new()}}
+\item \href{#method-CompassData-print}{\code{CompassData$print()}}
+\item \href{#method-CompassData-repr}{\code{CompassData$repr()}}
+\item \href{#method-CompassData-clone}{\code{CompassData$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
+\if{html}{\out{<a id="method-CompassData-new"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassData-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize the CompassSettings instance. Postprocess COMPASS data and populate tables.
 \subsection{Usage}{
@@ -60,7 +61,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
+\if{html}{\out{<a id="method-CompassData-print"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassData-print}{}}}
 \subsection{Method \code{print()}}{
 Prints a human-readable representation of this CompassData instance.
 \subsection{Usage}{
@@ -79,7 +81,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-repr"></a>}}
+\if{html}{\out{<a id="method-CompassData-repr"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassData-repr}{}}}
 \subsection{Method \code{repr()}}{
 Returns a human-readable representation of this CompassData instance.
 \subsection{Usage}{
@@ -98,7 +101,8 @@ An output.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
+\if{html}{\out{<a id="method-CompassData-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassData-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

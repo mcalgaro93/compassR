@@ -10,6 +10,7 @@
 #'
 #' @noRd
 get_gene_expression_statistics <- function(linear_gene_expression_matrix, metabolic_genes) {
+    is_metabolic <- gene <- NULL
     total_expressions <- colSums(linear_gene_expression_matrix)
     metabolic_expressions <- colSums(linear_gene_expression_matrix[
         metabolic_genes %>%

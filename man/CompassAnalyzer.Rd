@@ -16,16 +16,17 @@ An object through which you can access several useful functions for your COMPASS
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{CompassAnalyzer$new()}}
-\item \href{#method-print}{\code{CompassAnalyzer$print()}}
-\item \href{#method-repr}{\code{CompassAnalyzer$repr()}}
-\item \href{#method-conduct_wilcoxon_test}{\code{CompassAnalyzer$conduct_wilcoxon_test()}}
-\item \href{#method-get_umap_components}{\code{CompassAnalyzer$get_umap_components()}}
-\item \href{#method-clone}{\code{CompassAnalyzer$clone()}}
+\item \href{#method-CompassAnalyzer-new}{\code{CompassAnalyzer$new()}}
+\item \href{#method-CompassAnalyzer-print}{\code{CompassAnalyzer$print()}}
+\item \href{#method-CompassAnalyzer-repr}{\code{CompassAnalyzer$repr()}}
+\item \href{#method-CompassAnalyzer-conduct_wilcoxon_test}{\code{CompassAnalyzer$conduct_wilcoxon_test()}}
+\item \href{#method-CompassAnalyzer-get_umap_components}{\code{CompassAnalyzer$get_umap_components()}}
+\item \href{#method-CompassAnalyzer-clone}{\code{CompassAnalyzer$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-new"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-new}{}}}
 \subsection{Method \code{new()}}{
 Initialize the CompassAnalyzer instance.
 \subsection{Usage}{
@@ -44,7 +45,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-print"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-print}{}}}
 \subsection{Method \code{print()}}{
 Prints a human-readable representation of this CompassAnalyzer instance.
 \subsection{Usage}{
@@ -63,7 +65,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-repr"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-repr"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-repr}{}}}
 \subsection{Method \code{repr()}}{
 Returns a human-readable representation of this CompassAnalyzer instance.
 \subsection{Usage}{
@@ -82,7 +85,8 @@ An output.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-conduct_wilcoxon_test"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-conduct_wilcoxon_test"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-conduct_wilcoxon_test}{}}}
 \subsection{Method \code{conduct_wilcoxon_test()}}{
 Description.
 \subsection{Usage}{
@@ -115,7 +119,8 @@ A tibble, where each row represents a Wilcoxon rank-sum test for whether a react
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-get_umap_components"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-get_umap_components"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-get_umap_components}{}}}
 \subsection{Method \code{get_umap_components()}}{
 Description.
 \subsection{Usage}{
@@ -142,7 +147,8 @@ A tibble, where each row represents the low-dimensional UMAP embedding of a cell
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

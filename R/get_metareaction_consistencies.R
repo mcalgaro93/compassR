@@ -10,6 +10,7 @@
 #'
 #' @noRd
 get_metareaction_consistencies <- function(reaction_consistencies, metareactions) {
+    reaction_id <- metareaction_id <- NULL
     metareaction_consistencies <-
         reaction_consistencies %>%
         tibble::as_tibble(rownames = "reaction_id") %>%

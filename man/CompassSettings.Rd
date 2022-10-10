@@ -40,14 +40,15 @@ An object through which you can specify settings for your COMPASS analysis.
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{CompassSettings$new()}}
-\item \href{#method-print}{\code{CompassSettings$print()}}
-\item \href{#method-repr}{\code{CompassSettings$repr()}}
-\item \href{#method-clone}{\code{CompassSettings$clone()}}
+\item \href{#method-CompassSettings-new}{\code{CompassSettings$new()}}
+\item \href{#method-CompassSettings-print}{\code{CompassSettings$print()}}
+\item \href{#method-CompassSettings-repr}{\code{CompassSettings$repr()}}
+\item \href{#method-CompassSettings-clone}{\code{CompassSettings$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
+\if{html}{\out{<a id="method-CompassSettings-new"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassSettings-new}{}}}
 \subsection{Method \code{new()}}{
 Description.
 \subsection{Usage}{
@@ -114,7 +115,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
+\if{html}{\out{<a id="method-CompassSettings-print"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassSettings-print}{}}}
 \subsection{Method \code{print()}}{
 Prints a human-readable representation of this CompassSettings instance.
 \subsection{Usage}{
@@ -133,7 +135,8 @@ NULL.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-repr"></a>}}
+\if{html}{\out{<a id="method-CompassSettings-repr"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassSettings-repr}{}}}
 \subsection{Method \code{repr()}}{
 Returns a human-readable representation of this CompassSettings instance.
 \subsection{Usage}{
@@ -152,7 +155,8 @@ An output.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
+\if{html}{\out{<a id="method-CompassSettings-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassSettings-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
