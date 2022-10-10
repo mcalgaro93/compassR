@@ -1,6 +1,8 @@
 Package: compassR
 Version: 1.0.0
 Title: A Library for Conducting Analyses on COMPASS Data
+Author: Yosef Lab
+Maintainer: Yosef Lab <git@github.com>
 Description: This package provides a specialized pipeline for the analysis and
     interpretation of cell-to-cell metabolic heterogeneity based on the single-
     cell metabolic reaction consistency matrix produced by the COMPASS algorithm
@@ -18,4 +20,4 @@ Suggests:
 License: BSD-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.0.2
+RoxygenNote: 7.2.1
