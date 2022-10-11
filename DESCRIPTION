@@ -15,8 +15,11 @@ Imports:
     magrittr,
     R6,
     tidyverse,
+    cluster,
+    ggplot2,
+    purrr
 Suggests:
-    uwot,
+    uwot
 License: BSD-3
 Encoding: UTF-8
 LazyData: true
