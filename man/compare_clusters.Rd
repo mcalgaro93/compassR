@@ -43,9 +43,9 @@ a list of results.
     \item{\code{DC_core_metabolism_table}}{ ready-to-plot table of
     differentially consistent reactions or metareactions}
     \item{\code{p_DC_reactions}}{ plot for the differentially consistent 
-    reactions}
+    reactions when \code{for_metareactions = TRUE}}
     \item{\code{p_DC_reactions_cohensd}}{ plot for the effect sizes of the 
-    differentially consistent reactions}}
+    differentially consistent reactions when \code{for_metareactions = TRUE}}}
 }
 \description{
 Given two groups of cells the function returns several objects to study the 
