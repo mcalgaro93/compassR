@@ -5,6 +5,7 @@
 \title{compare_clusters}
 \usage{
 compare_clusters(
+  cell_info,
   compass_analyzer,
   compass_data,
   variable,
@@ -16,6 +17,8 @@ compare_clusters(
 )
 }
 \arguments{
+\item{cell_info}{the object containing the cell's metadata information}
+
 \item{compass_analyzer}{the object created by CompassAnalyzer$new}
 
 \item{compass_data}{the object created by CompassData$new}

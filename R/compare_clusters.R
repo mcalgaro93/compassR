@@ -11,6 +11,7 @@
 #' @importFrom magrittr %>% 
 #' @import ggplot2
 #' 
+#' @param cell_info the object containing the cell's metadata information
 #' @param compass_analyzer the object created by CompassAnalyzer$new
 #' @param compass_data the object created by CompassData$new
 #' @param variable the name of the variable to test
@@ -36,6 +37,7 @@
 #'     differentially consistent reactions when \code{for_metareactions = TRUE}}}
 
 compare_clusters <- function(
+        cell_info,
         compass_analyzer, 
         compass_data, 
         variable,
@@ -46,11 +48,11 @@ compare_clusters <- function(
 {
     # Get cell_ids
     group_A_cell_ids <-
-        cell_info_with_umap_components %>%
+        cell_info %>%
         filter(get(variable) %in% cluster_A) %>%
         pull(cell_id)
     group_B_cell_ids <-
-        cell_info_with_umap_components %>%
+        cell_info %>%
         filter(get(variable) %in% cluster_B) %>%
         pull(cell_id)
     
