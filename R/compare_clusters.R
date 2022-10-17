@@ -223,10 +223,9 @@ compare_clusters <- function(
 #' subsystems is generated.
 #'
 #' @importFrom dplyr summarise
-#' @import ggrepel geom_text_repel 
+#' @importFrom ggrepel geom_text_repel 
 #' @importFrom magrittr %>% 
 #' @import ggplot2 ggalluvial
-#' @importClassesFrom ggalluvial StatAlluvium
 #' 
 #' @param wilcoxon_results_with_metadata the object created by the 
 #' compare_clusters() function
