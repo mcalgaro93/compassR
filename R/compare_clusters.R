@@ -223,9 +223,10 @@ compare_clusters <- function(
 #' subsystems is generated.
 #'
 #' @importFrom dplyr summarise
-#' @importFrom ggrepel geom_text_repel 
+#' @import ggrepel geom_text_repel 
 #' @importFrom magrittr %>% 
 #' @import ggplot2 ggalluvial
+#' @importClassesFrom ggalluvial StatAlluvium
 #' 
 #' @param wilcoxon_results_with_metadata the object created by the 
 #' compare_clusters() function
@@ -249,7 +250,7 @@ plot_metareaction <- function(
         geom_alluvium(aes(fill = as.factor(metareaction_id))) +
         geom_stratum() +
         geom_text(stat = "stratum", aes(label = after_stat(stratum)), size = 4, min.y = 5) +
-        ggrepel::geom_text_repel(stat = "stratum", aes(label = after_stat(stratum)), size = 4, max.y = 5, nudge_x = 1) +
+        geom_text_repel(stat = "stratum", aes(label = after_stat(stratum)), size = 4, max.y = 5, nudge_x = 1) +
         scale_x_discrete(limits = c("Metabolism", "Metareaction ID", "Subsystem"), expand = c(0.5, 0)) +
         theme(legend.position = "none") +
         ggtitle(label = "Alluvium represetation for selected Metareactions", subtitle = "by metabolism type and subsystem")
