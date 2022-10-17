@@ -17,7 +17,13 @@ Imports:
     tidyverse,
     cluster,
     ggplot2,
-    purrr
+    purrr, 
+    DT,
+    dplyr,
+    ggalluvial,
+    ggrepel,
+    reshape2,
+    tidytext
 Suggests:
     uwot
 License: BSD-3
