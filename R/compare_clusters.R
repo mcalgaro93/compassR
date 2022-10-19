@@ -7,6 +7,7 @@
 #' @importFrom dplyr summarise
 #' @importFrom DT datatable
 #' @importFrom reshape2 melt
+#' @importFrom scales hue_pal
 #' @importFrom tidytext reorder_within scale_y_reordered
 #' @importFrom magrittr %>% 
 #' @import ggplot2
@@ -206,8 +207,9 @@ compare_clusters <- function(
             ggtitle(
                 label = "Effect size of the differentially consistent reactions", 
                 subtitle = "Colored by direction and stratified by core metabolism, ordered by median Cohen's D") +
-            scale_color_discrete(name = "More consistent in:", breaks = as.factor(c(-1,1)),
-                labels = c(paste0(cluster_B, collapse = ", "), paste0(cluster_A, collapse = ", ")))
+            scale_color_discrete(name = "More consistent in:", breaks = as.factor(c(1,-1)),
+                labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")),
+                type = rev(scales::hue_pal()(2)))
         out <- append(out, values = list(
             "p_DC_reactions" = p_DC_reactions,
             "p_DC_reactions_cohensd" = p_DC_reactions_cohensd))
