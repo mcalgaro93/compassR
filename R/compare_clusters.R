@@ -206,8 +206,8 @@ compare_clusters <- function(
             ggtitle(
                 label = "Effect size of the differentially consistent reactions", 
                 subtitle = "Colored by direction and stratified by core metabolism, ordered by median Cohen's D") +
-            scale_color_discrete(name = "More consistent in:", 
-                                 labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")))
+            scale_color_discrete(name = "More consistent in:", breaks = as.factor(c(1,-1)),
+                labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")))
         out <- append(out, values = list(
             "p_DC_reactions" = p_DC_reactions,
             "p_DC_reactions_cohensd" = p_DC_reactions_cohensd))
