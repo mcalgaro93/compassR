@@ -126,6 +126,38 @@ CompassAnalyzer <- R6::R6Class(
             umap_components %<>% tibble::as_tibble()
             umap_components
         }
-
+        
+        #' @description
+        #' Description.
+        #' 
+        #' @importFrom stats prcomp
+        #'
+        #' @param consistencies_matrix Either your CompassData instance's reaction_consistencies matrix, or its metareaction_consistencies matrix, depending on whether the high-dimensional representation of each cell should encapsulate the cell's reaction consistencies or its metareaction consistencies. In the former case the PCA algorithm will find a num_components-dimensional embedding for each cell in (# reactions)-dimensional space, and in the latter case the PCA algorithm will find a num_components-dimensional embedding for each cell in (# metareactions)-dimensional space.
+        #' @param num_components The number of PCA components to calculate (i.e. the dimensionality of the embedding).
+        #' @param ... Unused.
+        #'
+        #' @return A tibble, where each row represents the low-dimensional PCA embedding of a cell. It has the following columns: Your CompassSettings instance's cell_id_col_name, component_1, component_2, ..., component_{num_components}.
+        #'
+        #' @importFrom magrittr %>% %<>%
+        get_pca_components = function(consistencies_matrix, ..., num_components = 2) {
+            res.pca <- stats::prcomp(t(consistencies_matrix))
+            # explained_variance_ratio <- 100 * summary(res.pca)[["importance"]]['Proportion of Variance',]
+            pca_components <- data.frame(t(t(res.pca[["x"]])/res.pca[["sdev"]]))[, seq_len(num_components)]
+            # PCA_coord$cell_id <- rownames(PCA_coord)
+            pca_components %<>% cbind(colnames(consistencies_matrix), .)
+            colnames(pca_components) <- append(
+                self$settings$cell_id_col_name,
+                paste("PCA", 1:num_components, sep = "_")
+            )
+            pca_components %<>% tibble::as_tibble()
+            pca_components
+            # PCA_loads <- mapply(
+            #     data.frame(res.pca[["rotation"]]), 
+            #     summary(res.pca)[["sdev"]], 
+            #     FUN = function(comp, variance) {
+            #         loadings <- comp * variance
+            #         return(loadings)
+            #     }, SIMPLIFY = TRUE, USE.NAMES = TRUE)
+        }
     )
 )
