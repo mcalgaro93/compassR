@@ -125,7 +125,7 @@ CompassAnalyzer <- R6::R6Class(
             )
             umap_components %<>% tibble::as_tibble()
             umap_components
-        }
+        },
         
         #' @description
         #' Description.

@@ -21,6 +21,7 @@ An object through which you can access several useful functions for your COMPASS
 \item \href{#method-CompassAnalyzer-repr}{\code{CompassAnalyzer$repr()}}
 \item \href{#method-CompassAnalyzer-conduct_wilcoxon_test}{\code{CompassAnalyzer$conduct_wilcoxon_test()}}
 \item \href{#method-CompassAnalyzer-get_umap_components}{\code{CompassAnalyzer$get_umap_components()}}
+\item \href{#method-CompassAnalyzer-get_pca_components}{\code{CompassAnalyzer$get_pca_components()}}
 \item \href{#method-CompassAnalyzer-clone}{\code{CompassAnalyzer$clone()}}
 }
 }
@@ -144,6 +145,34 @@ Description.
 }
 \subsection{Returns}{
 A tibble, where each row represents the low-dimensional UMAP embedding of a cell. It has the following columns: Your CompassSettings instance's cell_id_col_name, component_1, component_2, ..., component_{num_components}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-CompassAnalyzer-get_pca_components"></a>}}
+\if{latex}{\out{\hypertarget{method-CompassAnalyzer-get_pca_components}{}}}
+\subsection{Method \code{get_pca_components()}}{
+Description.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{CompassAnalyzer$get_pca_components(
+  consistencies_matrix,
+  ...,
+  num_components = 2
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{consistencies_matrix}}{Either your CompassData instance's reaction_consistencies matrix, or its metareaction_consistencies matrix, depending on whether the high-dimensional representation of each cell should encapsulate the cell's reaction consistencies or its metareaction consistencies. In the former case the PCA algorithm will find a num_components-dimensional embedding for each cell in (# reactions)-dimensional space, and in the latter case the PCA algorithm will find a num_components-dimensional embedding for each cell in (# metareactions)-dimensional space.}
+
+\item{\code{...}}{Unused.}
+
+\item{\code{num_components}}{The number of PCA components to calculate (i.e. the dimensionality of the embedding).}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+A tibble, where each row represents the low-dimensional PCA embedding of a cell. It has the following columns: Your CompassSettings instance's cell_id_col_name, component_1, component_2, ..., component_{num_components}.
 }
 }
 \if{html}{\out{<hr>}}
