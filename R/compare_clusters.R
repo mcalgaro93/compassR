@@ -24,6 +24,9 @@
 #' reactions (default 0.05)
 #' @param cohens_d_th cohen's D statistic threshold to detect effect-size 
 #' significant reactions (default 1)
+#' @param core_levels_to_plot default "Core Metabolism" and 
+#' "Not Core Metabolism". Decide whether to plot significant reactions of core 
+#' and not core metabolism rather than only one group.
 #'
 #' @return a list of results.
 #' \itemize{
@@ -45,7 +48,8 @@ compare_clusters <- function(
         cluster_A, cluster_B, 
         for_metareactions = FALSE,
         adjusted_p_value_th = 0.05,
-        cohens_d_th = 1)
+        cohens_d_th = 1, 
+        core_levels_to_plot = c("Core Metabolism", "Not Core Metabolism"))
 {
     # Get cell_ids
     group_A_cell_ids <-
@@ -155,65 +159,64 @@ compare_clusters <- function(
         "DC_core_metabolism_table" = DC_core_metabolism_table)
     
     ##### PLOTS #####
+    sig_subsystem <- wilcoxon_results_with_metadata %>% 
+        filter(adjusted_p_value <= adjusted_p_value_th) 
     
-    if(!for_metareactions){
-        sig_subsystem <- wilcoxon_results_with_metadata %>% 
-            filter(adjusted_p_value <= adjusted_p_value_th) 
-        
-        sig_subsystem_summary <- sig_subsystem %>%
-            group_by(subsystem, core) %>%
-            dplyr::summarise(
-                pos = sum(cohens_d > 0),
-                neg = -sum(cohens_d < 0))
-        
-        p_DC_reactions <- ggplot(data = reshape2::melt(sig_subsystem_summary), 
-                                 mapping = aes(
-                                     x = value, 
-                                     y = tidytext::reorder_within(
-                                         x = subsystem, 
-                                         by = value, 
-                                         within = core), 
-                                     fill = variable)) +
-            facet_wrap(facets = ~ core, nrow = 1, scales = "free") + 
-            geom_col(orientation = "y") +
-            geom_text(aes(label = ifelse(value > 0, value, "")), hjust = "right") +
-            geom_text(aes(label = ifelse(value < 0, abs(value), "")), hjust = "left") +
-            scale_x_continuous(trans = ggallin::pseudolog10_trans) +
-            scale_y_reordered() +
-            theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0)) + 
-            theme(legend.position = "top") +
-            ylab("Subsystem") + xlab("Number of reactions") +
-            ggtitle(
-                label = "Number of differentially consistent reactions", 
-                subtitle = "Colored by direction and stratified by core metabolism") +
-            scale_fill_discrete(name = "More consistent in:", 
-                                labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")))
-        
-        p_DC_reactions_cohensd <- ggplot(data = sig_subsystem, 
-                                         mapping = aes(
-                                             x = cohens_d, 
-                                             y = reorder_within(
-                                                 x = subsystem, 
-                                                 by = cohens_d, 
-                                                 within = core, 
-                                                 fun = median), 
-                                             color = as.factor(sign(cohens_d)))) +
-            facet_wrap(~ core, scales = "free") +
-            scale_y_reordered() +
-            geom_jitter(width = 0, height = 0.3, alpha = 0.5) +
-            geom_vline(aes(xintercept = 0), lty = 2, color = "grey") +
-            theme(legend.position = "top") +
-            ylab("Subsystem") + xlab("Cohen's D Effect Size") +
-            ggtitle(
-                label = "Effect size of the differentially consistent reactions", 
-                subtitle = "Colored by direction and stratified by core metabolism, ordered by median Cohen's D") +
-            scale_color_discrete(name = "More consistent in:", breaks = as.factor(c(1,-1)),
-                labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")),
-                type = rev(scales::hue_pal()(2)))
-        out <- append(out, values = list(
-            "p_DC_reactions" = p_DC_reactions,
-            "p_DC_reactions_cohensd" = p_DC_reactions_cohensd))
-    }
+    sig_subsystem_summary <- sig_subsystem %>%
+        group_by(subsystem, core) %>%
+        dplyr::summarise(
+            pos = sum(cohens_d > 0),
+            neg = -sum(cohens_d < 0))
+    
+    p_DC_reactions <- ggplot(data = reshape2::melt(sig_subsystem_summary) %>%
+        filter(core %in% core_levels_to_plot), 
+                             mapping = aes(
+                                 x = value, 
+                                 y = tidytext::reorder_within(
+                                     x = subsystem, 
+                                     by = value, 
+                                     within = core), 
+                                 fill = variable)) +
+        facet_wrap(facets = ~ core, nrow = 1, scales = "free") + 
+        geom_col(orientation = "y") +
+        geom_text(aes(label = ifelse(value > 0, value, "")), hjust = "right") +
+        geom_text(aes(label = ifelse(value < 0, abs(value), "")), hjust = "left") +
+        scale_x_continuous(trans = ggallin::pseudolog10_trans) +
+        scale_y_reordered() +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0)) + 
+        theme(legend.position = "top") +
+        ylab("Subsystem") + xlab("Number of reactions") +
+        ggtitle(
+            label = "Number of differentially consistent reactions", 
+            subtitle = "Colored by direction and stratified by core metabolism") +
+        scale_fill_discrete(name = "More consistent in:", 
+                            labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")))
+    
+    p_DC_reactions_cohensd <- ggplot(data = sig_subsystem %>%
+        filter(core %in% core_levels_to_plot), 
+                                     mapping = aes(
+                                         x = cohens_d, 
+                                         y = reorder_within(
+                                             x = subsystem, 
+                                             by = cohens_d, 
+                                             within = core, 
+                                             fun = median), 
+                                         color = as.factor(sign(cohens_d)))) +
+        facet_wrap(~ core, scales = "free") +
+        scale_y_reordered() +
+        geom_jitter(width = 0, height = 0.3, alpha = 0.5) +
+        geom_vline(aes(xintercept = 0), lty = 2, color = "grey") +
+        theme(legend.position = "top") +
+        ylab("Subsystem") + xlab("Cohen's D Effect Size") +
+        ggtitle(
+            label = "Effect size of the differentially consistent reactions", 
+            subtitle = "Colored by direction and stratified by core metabolism, ordered by median Cohen's D") +
+        scale_color_discrete(name = "More consistent in:", breaks = as.factor(c(1,-1)),
+            labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")),
+            type = rev(scales::hue_pal()(2)))
+    out <- append(out, values = list(
+        "p_DC_reactions" = p_DC_reactions,
+        "p_DC_reactions_cohensd" = p_DC_reactions_cohensd))
     return(out)
 }
 
