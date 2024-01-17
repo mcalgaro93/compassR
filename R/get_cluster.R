@@ -58,7 +58,8 @@ avg_sil <- function(df, k, method = "average") {
 get_optimal_clusters <- function (UMAPcoords, k.values = 2:15, 
     method = "average", plotIt = TRUE) {
     # extract avg silhouette for 2-15 clusters
-    avg_sil_values <- purrr::map_dbl(k.values, avg_sil, df = UMAPcoords)
+    avg_sil_values <- purrr::map_dbl(k.values, avg_sil, df = UMAPcoords, 
+        method = method)
     df_to_plot <- data.frame("n_cluster" = k.values, 
                              "avg_silhouette" = avg_sil_values)
     if (plotIt) {
