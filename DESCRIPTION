@@ -1,5 +1,5 @@
 Package: compassR
-Version: 1.0.16
+Version: 1.0.17
 Title: A Library for Conducting Analyses on COMPASS Data
 Author: Yosef Lab
 Maintainer: Yosef Lab <git@github.com>
@@ -23,7 +23,8 @@ Imports:
     ggalluvial,
     ggrepel,
     reshape2,
-    tidytext
+    tidytext,
+    scales
 Suggests:
     uwot
 License: BSD-3
