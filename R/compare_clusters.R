@@ -54,12 +54,12 @@ compare_clusters <- function(
     # Get cell_ids
     group_A_cell_ids <-
         cell_info %>%
-        filter(get(variable) %in% cluster_A) %>%
-        pull(cell_id)
+        dplyr::filter(get(variable) %in% cluster_A) %>%
+        dplyr::pull(cell_id)
     group_B_cell_ids <-
         cell_info %>%
-        filter(get(variable) %in% cluster_B) %>%
-        pull(cell_id)
+        dplyr::filter(get(variable) %in% cluster_B) %>%
+        dplyr::pull(cell_id)
     
     # Perform wilcox test
     wilcoxon_results <- compass_analyzer$conduct_wilcoxon_test(
@@ -82,13 +82,13 @@ compare_clusters <- function(
         )
     # Add metadata        
     wilcoxon_results_with_metadata <- wilcoxon_results %>%
-        inner_join( # Add reaction partitions
+        dplyr::inner_join( # Add reaction partitions
             compass_data$reaction_partitions,
             by = ifelse(test = for_metareactions, 
                         yes = "metareaction_id", 
                         no = "reaction_id")
         ) %>%
-        inner_join( # Add reaction metadata
+        dplyr::inner_join( # Add reaction metadata
             compass_data$reaction_metadata,
             by = "reaction_no_direction"
         ) %>% 
@@ -98,7 +98,7 @@ compare_clusters <- function(
     
     # Checking core metareactions
     core_metareaction_df <- wilcoxon_results_with_metadata %>%
-        group_by(metareaction_id) %>%
+        dplyr::group_by(metareaction_id) %>%
         dplyr::summarise(core_metareaction = ifelse(
             test = sum(core) > 0, 
             yes = "Core Metabolism",
@@ -106,7 +106,7 @@ compare_clusters <- function(
     
     # Adding core metareactions
     wilcoxon_results_with_metadata <- wilcoxon_results_with_metadata %>%
-        inner_join(
+        dplyr::inner_join(
             core_metareaction_df,
             by = "metareaction_id"
         )
@@ -121,24 +121,24 @@ compare_clusters <- function(
         # Counting the number of reactions for each metareaction
         # Counting the number of subsystem for each metareaction
         reaction_metareaction_df <- wilcoxon_results_with_metadata %>%
-            group_by(metareaction_id) %>%
+            dplyr::group_by(metareaction_id) %>%
             dplyr::summarise(
                 reaction_number = length(unique(reaction_id)),
                 subsystem_number = length(unique(subsystem))) 
         # Extract core metabolism metareactions
         DC_core_metabolism <- wilcoxon_results_with_metadata %>% 
-            filter(adjusted_p_value < adjusted_p_value_th & core == "Core Metabolism") %>%
-            select(metareaction_id, cohens_d, adjusted_p_value) %>%
-            arrange(adjusted_p_value) %>%
-            left_join(reaction_metareaction_df, by = "metareaction_id") %>%
+            dplyr::filter(adjusted_p_value < adjusted_p_value_th & core == "Core Metabolism") %>%
+            dplyr::select(metareaction_id, cohens_d, adjusted_p_value) %>%
+            dplyr::arrange(adjusted_p_value) %>%
+            dplyr::left_join(reaction_metareaction_df, by = "metareaction_id") %>%
             distinct()
     } else {
         # Extract core metabolism reactions
         DC_core_metabolism <- wilcoxon_results_with_metadata %>% 
-            filter(adjusted_p_value < adjusted_p_value_th & core == "Core Metabolism") %>%
-            select(reaction_id, reaction_name, subsystem,
+            dplyr::filter(adjusted_p_value < adjusted_p_value_th & core == "Core Metabolism") %>%
+            dplyr::select(reaction_id, reaction_name, subsystem,
                    associated_genes, cohens_d, adjusted_p_value) %>%
-            arrange(adjusted_p_value)
+            dplyr::arrange(adjusted_p_value)
     }
     table_cap <- paste0(
         "Group: ",
@@ -160,16 +160,16 @@ compare_clusters <- function(
     
     ##### PLOTS #####
     sig_subsystem <- wilcoxon_results_with_metadata %>% 
-        filter(adjusted_p_value <= adjusted_p_value_th) 
+        dplyr::filter(adjusted_p_value <= adjusted_p_value_th) 
     
     sig_subsystem_summary <- sig_subsystem %>%
-        group_by(subsystem, core) %>%
+        dplyr::group_by(subsystem, core) %>%
         dplyr::summarise(
             pos = sum(cohens_d > 0),
             neg = -sum(cohens_d < 0))
     
     p_DC_reactions <- ggplot(data = reshape2::melt(sig_subsystem_summary) %>%
-        filter(core %in% core_levels_to_plot), 
+                                 dplyr::filter(core %in% core_levels_to_plot), 
                              mapping = aes(
                                  x = value, 
                                  y = tidytext::reorder_within(
@@ -193,7 +193,7 @@ compare_clusters <- function(
                             labels = c(paste0(cluster_A, collapse = ", "), paste0(cluster_B, collapse = ", ")))
     
     p_DC_reactions_cohensd <- ggplot(data = sig_subsystem %>%
-        filter(core %in% core_levels_to_plot), 
+                                         dplyr::filter(core %in% core_levels_to_plot), 
                                      mapping = aes(
                                          x = cohens_d, 
                                          y = reorder_within(
