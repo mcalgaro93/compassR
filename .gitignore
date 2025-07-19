@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+inst/extdata/.DS_Store
+inst/.DS_Store
+compassR.Rproj
+.Rbuildignore
+.DS_Store
